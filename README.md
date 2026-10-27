@@ -56,13 +56,13 @@ Create a `backend/.env` file. Do not commit this file or put real credentials in
 DATABASE_URL=postgresql://postgres:your-local-password@localhost:5432/clientdesk
 SECRET_KEY=replace-with-a-long-random-secret
 ALGORITHM=HS256
-RESEND_API_KEY=re_xxxxxxxxx
+BREVO_API_KEY=re_xxxxxxxxx
 EMAIL_FROM=ClientDesk <verified-sender@example.com>
 FRONTEND_REDIRECT_URI=http://localhost:5173
 COOKIE_SECURE=false
 ```
 
-The database named in `DATABASE_URL` must exist before applying migrations. `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `RESEND_API_KEY`, and `EMAIL_FROM` are required by the current backend configuration. `FRONTEND_REDIRECT_URI` is used for email links and CORS; `FRONTEND_URI` is accepted as an email-link fallback. Configure `RESEND_API_KEY` and `EMAIL_FROM` with valid Resend values to use signup email verification.
+The database named in `DATABASE_URL` must exist before applying migrations. `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `BREVO_API_KEY`, and `EMAIL_FROM` are required by the current backend configuration. `FRONTEND_REDIRECT_URI` is used for email links and CORS; `FRONTEND_URI` is accepted as an email-link fallback. Configure `BREVO_API_KEY` and `EMAIL_FROM` with valid Resend values to use signup email verification.
 
 Optional authentication and signup settings have defaults:
 

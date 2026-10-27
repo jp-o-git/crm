@@ -14,8 +14,8 @@ import Report from "../pages/private/Report";
 import OffersPage from "../pages/private/OfferPage";
 
 export const Router = createBrowserRouter([
-  // Logged-out visitors only: no NavBar, no Footer.
-  // Logged-in users are sent to /dashboard.
+  // Logged-out visitors only. The landing page uses the public navigation;
+  // logged-in users are sent to /dashboard.
   {
     element: <PublicOnlyRoute />,
     children: [
@@ -26,7 +26,7 @@ export const Router = createBrowserRouter([
     ],
   },
 
-  // Logged-in users only, with NavBar and Footer.
+  // Logged-in users only, with authenticated navigation and footer.
   // Logged-out visitors are sent to /login.
   {
     element: <ProtectedRoute />,

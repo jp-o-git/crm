@@ -78,7 +78,7 @@ Create `backend/.env` and set values for your local environment. Never commit re
 DATABASE_URL=postgresql://postgres:your-local-password@localhost:5432/clientdesk
 SECRET_KEY=replace-with-a-long-random-secret
 ALGORITHM=HS256
-RESEND_API_KEY=re_xxxxxxxxx
+BREVO_API_KEY=re_xxxxxxxxx
 EMAIL_FROM=ClientDesk <verified-sender@example.com>
 FRONTEND_REDIRECT_URI=http://localhost:5173
 COOKIE_SECURE=false
@@ -86,7 +86,7 @@ COOKIE_SECURE=false
 
 Create the PostgreSQL database named in `DATABASE_URL` before migrating. The current Alembic environment uses `psycopg2`, so use a PostgreSQL connection URL when running migrations.
 
-The backend requires `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `RESEND_API_KEY`, and `EMAIL_FROM`. A valid Resend API key and verified sender are needed for email verification and report email.
+The backend requires `DATABASE_URL`, `SECRET_KEY`, `ALGORITHM`, `BREVO_API_KEY`, and `EMAIL_FROM`. A valid Resend API key and verified sender are needed for email verification and report email.
 
 Optional settings:
 

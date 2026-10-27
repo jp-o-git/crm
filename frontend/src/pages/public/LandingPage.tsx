@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   BarChart3,
@@ -11,6 +11,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Button from "../../components/Button";
+import NavBar from "../../components/NavBar";
+import Footer from "../../components/Footer";
 
 interface Feature {
   icon: LucideIcon;
@@ -83,54 +85,27 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <nav
-          className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
-          aria-label="Main navigation"
-        >
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight"
-          >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-700 text-white">
-              <Users className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <span>Client<span className="text-blue-700">Desk</span></span>
-          </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              to="/login"
-              className="rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
-            >
-              Sign in
-            </Link>
-            <Button size="sm" onClick={() => navigate("/login")}>
-              Get started
-            </Button>
-          </div>
-        </nav>
-      </header>
-      <main>
+    <div className="flex min-h-screen flex-col bg-white text-slate-900">
+      <NavBar isAuthenticated={false} />
+      <main className="flex-1">
         {/* Hero */}
-        <section className="overflow-hidden border-b border-slate-200 bg-slate-50">
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-2 lg:px-8">
+        <section className="border-b border-slate-200 bg-slate-50">
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-2 lg:gap-16 lg:px-8">
             <div className="max-w-2xl">
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-blue-800">
-                <span className="h-2 w-2 rounded-full bg-blue-700" />
-                Client relationship management, made simple
+              <p className="mb-4 inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-blue-800">
+                Simple CRM for freelancers and small businesses
               </p>
-              <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+              <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]">
                 Keep track of every client, deal and payment
               </h1>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">
+              <p className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
                 ClientDesk is a simple CRM for freelancers and small businesses.
                 Know who you're talking to, what you're selling and how much
                 you've earned, all in one place.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button size="lg" onClick={() => navigate("/login")}>
-                  Start for free
+                <Button size="lg" onClick={() => navigate("/register")}>
+                  Create your account
                   <ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </Button>
                 <Button
@@ -146,11 +121,12 @@ export default function LandingPage() {
                 </Button>
               </div>
               <p className="mt-4 text-xs text-slate-500">
-                Keep your contacts, pipeline and payments organized in one place.
+                Keep your contacts, pipeline and payments organized in one
+                place.
               </p>
             </div>
             <div className="relative mx-auto w-full max-w-xl">
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/70 sm:p-7">
+              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60 sm:p-7">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-5">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -188,7 +164,9 @@ export default function LandingPage() {
                     <p className="text-sm font-semibold text-slate-900">
                       Recent deals
                     </p>
-                    <span className="text-xs font-medium text-slate-500">Pipeline</span>
+                    <span className="text-xs font-medium text-slate-500">
+                      Pipeline
+                    </span>
                   </div>
                   <ul className="divide-y divide-slate-100 px-4">
                     {[
@@ -290,7 +268,7 @@ export default function LandingPage() {
                 click.
               </p>
             </div>
-            <Button size="lg" onClick={() => navigate("/login")}>
+            <Button size="lg" onClick={() => navigate("/register")}>
               Try it now
             </Button>
           </div>
@@ -309,13 +287,14 @@ export default function LandingPage() {
               size="lg"
               variant="secondary"
               className="mt-8"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/register")}
             >
               Create your account
             </Button>
           </div>
         </section>
       </main>
+      <Footer isAuthenticated={false} />
     </div>
   );
 }

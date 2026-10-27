@@ -7,7 +7,11 @@ const links = [
   { to: "/reports", label: "Reports" },
 ];
 
-export default function Footer() {
+interface FooterProps {
+  isAuthenticated?: boolean;
+}
+
+export default function Footer({ isAuthenticated = true }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
@@ -24,16 +28,37 @@ export default function Footer() {
 
         <nav aria-label="Footer navigation">
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            {links.map((link) => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  className="text-sm text-slate-600 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {isAuthenticated ? (
+              links.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="text-sm text-slate-600 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                    className="text-sm text-slate-600 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                  >
+                    Sign in
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/register"
+                    className="text-sm text-slate-600 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                  >
+                    Create account
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>

@@ -9,5 +9,5 @@ PyJWT
 pwdlib[argon2]
 python-multipart
 pydantic[email]
-resend
 reportlab
+sib-api-v3-sdk
