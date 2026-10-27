@@ -86,7 +86,6 @@ def send_email(
 
     api_client = sib_api_v3_sdk.ApiClient(configuration)
     api = sib_api_v3_sdk.TransactionalEmailsApi(api_client)
-    api.send_transac_email(sib_api_v3_sdk.SendSmtpEmail(**params))
     response = api.send_transac_email(sib_api_v3_sdk.SendSmtpEmail(**params))
     print(f"Brevo accepted email: from={sender_email} to={to} message_id={response.message_id}")
 
