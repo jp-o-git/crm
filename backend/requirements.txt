@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+psycopg2-binary
+dotenv
+pydantic
+SQLAlchemy==2.0.51
+alembic
+PyJWT
+pwdlib[argon2]
+python-multipart
+pydantic[email]
+resend
+reportlab
