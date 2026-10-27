@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "./AppLayout";
 import ProtectedRoute from "../router/ProtectedRoute";
 import PublicOnlyRoute from "../router/PublicOnlyRoute";
