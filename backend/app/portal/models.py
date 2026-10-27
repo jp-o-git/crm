@@ -13,6 +13,16 @@ class Token(BaseModel):
     token_type: str
 
 
+class SessionUser(BaseModel):
+    user_id: str
+    email: str
+    full_name: str
+
+
+class SessionToken(Token):
+    user: SessionUser
+
+
 class SignupStartRequest(BaseModel):
     email: EmailStr
 

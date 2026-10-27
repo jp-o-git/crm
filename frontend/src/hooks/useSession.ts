@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
-import api from "../lib/api";
+import api, { getAccessToken, restoreSession } from "../lib/api";
 
 export interface Me {
   user_id: string;
   email: string;
   full_name: string;
-  role: string;
 }
 
 export const ME_KEY = ["me"] as const;
@@ -16,6 +15,10 @@ export function useSession() {
   return useQuery({
     queryKey: ME_KEY,
     queryFn: async (): Promise<Me | null> => {
+      if (!getAccessToken()) {
+        return restoreSession();
+      }
+
       try {
         const { data } = await api.get<Me>("/auth/me");
         return data;

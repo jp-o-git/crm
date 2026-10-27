@@ -32,6 +32,7 @@ from .models import (
     SignupCompleteRequest,
     SignupStartRequest,
     SignupTokenRequest,
+    SessionToken,
     Token,
 )
 from shared_package.sync_function.auth_dep import get_current_user
@@ -142,7 +143,6 @@ def me(user: Annotated[Users, Depends(get_current_user)]):
         "user_id": str(user.user_id),
         "email": user.email,
         "full_name": user.full_name,
-        # "staff_type": user.staff_type,
     }
 
 @router.post("/signup/check")
@@ -203,7 +203,7 @@ def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 
 
 
-@router.post("/refresh", response_model=Token)
+@router.post("/refresh", response_model=SessionToken)
 def refresh(
     db: db_dependency,
     response: Response,
@@ -295,6 +295,11 @@ def refresh(
     return {
         "access_token": access,
         "token_type": "bearer",
+        "user": {
+            "user_id": str(user.user_id),
+            "email": user.email,
+            "full_name": user.full_name,
+        },
     }
 
 

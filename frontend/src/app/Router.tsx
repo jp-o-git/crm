@@ -2,16 +2,18 @@ import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "./AppLayout";
 import ProtectedRoute from "../router/ProtectedRoute";
 import PublicOnlyRoute from "../router/PublicOnlyRoute";
-import LandingPage from "../pages/public/LandingPage";
-import Login from "../pages/public/Login";
-import Register from "../pages/public/Register";
-import CompleteRegistration from "../pages/public/CompleteRegistration";
-import NotFoundPage from "../pages/public/NotFoundPage";
-import Dashboard from "../pages/private/Dashboard";
-import ContactsPage from "../pages/private/Contact";
-import ContactDetailPage from "../pages/private/ContactDetail";
-import Report from "../pages/private/Report";
-import OffersPage from "../pages/private/OfferPage";
+import {
+  CompleteRegistration,
+  ContactDetailPage,
+  ContactsPage,
+  Dashboard,
+  LandingPage,
+  Login,
+  NotFoundPage,
+  OffersPage,
+  Register,
+  Report,
+} from "./RoutePages";
 
 export const Router = createBrowserRouter([
   // Logged-out visitors only. The landing page uses the public navigation;

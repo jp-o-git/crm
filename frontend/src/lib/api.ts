@@ -9,6 +9,14 @@ export const setAccessToken = (token: string | null) => {
   accessToken = token;
 };
 
+export const getAccessToken = () => accessToken;
+
+export interface SessionUser {
+  user_id: string;
+  email: string;
+  full_name: string;
+}
+
 const api = axios.create({
   baseURL: BASE_URL,
   withCredentials: true, // sends the httpOnly refresh cookie
@@ -31,19 +39,21 @@ const NO_REFRESH_URLS = [
 
 type RetryableRequest = AxiosRequestConfig & { _retry?: boolean };
 
-let refreshPromise: Promise<string> | null = null;
+let refreshPromise: Promise<SessionUser> | null = null;
 
 // One shared refresh call. Your backend rotates refresh tokens and treats a reused
 // one as theft, so two refreshes at the same time would log the user out.
 const refreshSession = () => {
   if (!refreshPromise) {
     refreshPromise = axios
-      .post<{ access_token: string }>(`${BASE_URL}/auth/refresh`, null, {
-        withCredentials: true,
-      })
+      .post<{ access_token: string; user: SessionUser }>(
+        `${BASE_URL}/auth/refresh`,
+        null,
+        { withCredentials: true },
+      )
       .then(({ data }) => {
         setAccessToken(data.access_token);
-        return data.access_token;
+        return data.user;
       })
       .finally(() => {
         refreshPromise = null;
@@ -51,6 +61,17 @@ const refreshSession = () => {
   }
   return refreshPromise;
 };
+
+export async function restoreSession(): Promise<SessionUser | null> {
+  try {
+    return await refreshSession();
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      return null;
+    }
+    throw error;
+  }
+}
 
 api.interceptors.response.use(
   (response) => response,

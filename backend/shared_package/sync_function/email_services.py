@@ -13,8 +13,6 @@ BRAND_NAME = os.getenv("BRAND_NAME", "ClientDesk")
 
 FRONTEND_URI = (
     os.getenv("FRONTEND_REDIRECT_URI")
-    or os.getenv("FRONTEND_URI")
-    or "http://localhost:5173"
 ).rstrip("/")
 
 EMAIL_VERIFY_EXPIRE_MINUTES = int(
