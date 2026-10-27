@@ -147,12 +147,3 @@ npm run build
 ```
 
 `npm run build` runs the TypeScript project build before producing optimized frontend assets in `frontend/dist/`.
-
-## Production notes
-
-- Use a strong, private `SECRET_KEY`; never reuse the example value above.
-- Serve the frontend and API over HTTPS and set `COOKIE_SECURE=true` for production so refresh cookies are sent only over secure connections.
-- Set `FRONTEND_REDIRECT_URI` to the deployed frontend origin and configure CORS for only the origins you intend to serve.
-- Keep database credentials, email-provider credentials, and other secrets in deployment environment configuration, not in the repository.
-- Back up the database and apply Alembic migrations as part of the deployment process.
-- The frontend is a client-rendered single-page application. Its shared page metadata is in `frontend/index.html`; see [`frontend/README.md`](./frontend/README.md) for its SEO metadata notes.
