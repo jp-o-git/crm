@@ -94,7 +94,7 @@ Optional settings:
 | --- | --- | --- |
 | `FRONTEND_REDIRECT_URI` | `http://localhost:5173` | Frontend origin used for CORS and signup links |
 | `FRONTEND_URI` | None | Fallback frontend origin for signup links |
-| `COOKIE_SECURE` | `false` | Set to `true` when the API is served over HTTPS |
+| `COOKIE_SECURE` | `true` | Set to `false` for local HTTP development. Cross-site refresh cookies require HTTPS; when enabled, the cookie uses `SameSite=None` |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | `15` | Access-token lifetime |
 | `REFRESH_TOKEN_EXPIRE_DAYS` | `14` | Refresh-token lifetime |
 | `EMAIL_VERIFY_EXPIRE_MINUTES` | `60` | Signup verification-link lifetime |
@@ -137,6 +137,8 @@ The current CORS configuration allows the `FRONTEND_REDIRECT_URI` origin and the
 
 - `http://127.0.0.1:5173`
 - `http://localhost:5174`
+
+Set `FRONTEND_REDIRECT_URI` to the frontend's exact origin in production. When the frontend and API are on different sites, serve both over HTTPS and keep `COOKIE_SECURE=true`; the refresh cookie is then issued with `SameSite=None; Secure` so the browser can include it on session restoration requests.
 
 The default `FRONTEND_REDIRECT_URI` is `http://localhost:5173`. If the frontend runs on another origin, update the backend CORS configuration in `app/portal/main.py` as well as `FRONTEND_REDIRECT_URI`.
 

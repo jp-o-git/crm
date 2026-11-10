@@ -43,6 +43,7 @@ db_dependency = Annotated[Session, Depends(get_session)]
 
 REFRESH_COOKIE = "refresh_token"
 COOKIE_SECURE = os.getenv("COOKIE_SECURE", "true").lower() == "true"
+COOKIE_SAMESITE = "none" if COOKIE_SECURE else "lax"
 SIGNUP_RESEND_COOLDOWN_SECONDS = 60
 
 
@@ -75,7 +76,7 @@ def _issue_tokens(user: Users, db: Session, response: Response, family_id: str |
         value=refresh,
         httponly=True,
         secure=COOKIE_SECURE,
-        samesite="lax",
+        samesite=COOKIE_SAMESITE,
         max_age=REFRESH_TOKEN_EXPIRE_DAYS * 86400,
         path="/auth",
     )

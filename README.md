@@ -72,7 +72,7 @@ Optional authentication and signup settings have defaults:
 | `REFRESH_TOKEN_EXPIRE_DAYS` | `14` | Refresh-token lifetime |
 | `EMAIL_VERIFY_EXPIRE_MINUTES` | `60` | Signup verification-link lifetime |
 | `BRAND_NAME` | `ClientDesk` | Brand name in email messages |
-| `COOKIE_SECURE` | `false` | Set to `true` when serving the API over HTTPS in production |
+| `COOKIE_SECURE` | `true` | Set to `false` for local HTTP development. Cross-site refresh cookies require HTTPS; when enabled, the cookie uses `SameSite=None` |
 
 On Windows PowerShell, create and activate a virtual environment and install dependencies:
 
@@ -108,7 +108,7 @@ Vite serves the frontend at `http://localhost:5173` by default. The API client u
 VITE_API_URL=http://localhost:8000
 ```
 
-The backend CORS configuration allows the configured `FRONTEND_REDIRECT_URI` and local origins `http://127.0.0.1:5173` and `http://localhost:5174`; adjust it in `backend/app/portal/main.py` if your frontend uses another origin.
+The backend CORS configuration allows the configured `FRONTEND_REDIRECT_URI` and local origins `http://127.0.0.1:5173` and `http://localhost:5174`; set `FRONTEND_REDIRECT_URI` to the frontend's exact origin for production. The refresh cookie uses `SameSite=None; Secure` when `COOKIE_SECURE=true` so browsers can send it when the frontend and API are on different sites. Both must use HTTPS in that setup.
 
 ## API overview
 
